@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+
+<head>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- angularJS -->
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+<script>
+
+	var todoApp = angular.module("todoApp", []);
+
+	todoApp.controller("todoCtrl", function($scope) {
+		$scope.name = "test";
+
+		$scope.status = "ON";
+
+		$scope.btn01 = function() {
+			if($scope.status == "ON") {
+				$scope.status = "OFF";
+			} else {
+				$scope.status = "ON";
+			}
+		}
+
+		$scope.btn02 = function(txt) {
+			alert(txt);
+		}
+
+	});
+
+</script>
+
+</head>
+
+<body ng-controller="todoCtrl">
+
+	<button ng-click="btn01()">{{status}}</button>
+	<button ng-click="btn02('btn2')">btn2</button>
+
+</body>
+</html>

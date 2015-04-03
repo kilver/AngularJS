@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+
+<link href="./bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="./bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+<script src="./bower_components/angularjs/angular.min.js"></script>
+
+<script>
+
+	angular
+		.module("myApp", [])
+		.controller("defaultCtrl", function($scope) {
+			$scope.todos = [
+				{ action: "aa", complete: false},
+				{ action: "bb", complete: false},
+				{ action: "cc", complete: true},
+				{ action: "dd", complete: false},
+				{ action: "ee", complete: false}
+			];
+
+			$scope.viewFile = function() {
+				return $scope.showList ? "list.html" : "table.html";
+			};
+		});
+
+</script>
+
+<style>
+	.odd {background-color: lightcoral}
+	.even {background-color: lavenderblush}
+</style>
+
+</head>
+
+<body>
+
+	<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+
+		<h3 class="panel-header">To Do List</h3>
+		Data items will go here...
+		<br/>
+		There are <span class="ng-bind: todos.length"></span> items<br/>
+		There are <span ng-bind="todos.length"></span> items<br/>
+
+<hr/>
+
+		<div class="well">
+			<div>First item : {{todos[0].action}}</div>
+		</div>
+
+<hr/>
+
+		<div class="form-group well">
+			<label for="firstItem">Set First Item: <input type="text" class="form-control" ng-model="todos[0].action"/></label>
+		</div>
+
+<hr/>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Action</th>
+					<th>Done</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in todos">
+					<td>{{$index + 1}}</td>
+					<td>{{item.action}}</td>
+					<td>{{item.complete}}</td>
+				</tr>
+			</tbody>
+		</table>
+
+<hr/>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Action</th>
+					<th>Done</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in todos" ng-class="$odd ? 'odd' : 'even'">
+					<td>{{$index + 1}}</td>
+					<td ng-repeat="(key, value) in item">
+						{{key}}={{value}}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+<hr/>
+
+		<table class="table">
+			<tbody>
+				<tr ng-repeat-start="item in todos">
+					<td>This is item {{$index}}</td>
+				</tr>
+				<tr>
+					<td>{{item.action}}</td>
+				</tr>
+				<tr ng-repeat-end>
+					<td>idx : {{$index}} ... {{item.complete ? '' : 'not'}} complete</td>
+				</tr>
+			</tbody>
+		</table>
+
+<hr/>
+
+		<ol>
+			<li ng-repeat="item in todos">
+				{{item.action}}
+				<span ng-if="item.complete">(Done)</span>
+			</li>
+		</ol>
+
+<hr/>
+
+	</div>
+
+</body>
+</html>

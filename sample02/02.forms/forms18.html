@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+<title>Forms</title>
+<script src="../bower_components/angularjs/angular.min.js"></script>
+<link href="../bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<link href="../bower_components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+<script>
+
+	angular
+		.module("myApp", [])
+		.controller("defaultCtrl", function($scope) {
+			$scope.todos = [
+				{id: 100, place: "Store", action: 'aa', complete: false},
+				{id: 200, place: "Home", action: 'bb', complete: false},
+				{id: 300, place: "Store", action: 'cc', complete: true}];
+		});
+
+</script>
+
+<style>
+</style>
+
+</head>
+
+<body>
+
+	<div id="todoPanel" class="panel" ng-controller="defaultCtrl">
+
+		<form name="myForm" novalidate>
+
+			<div class="well">
+				<div class="form-group">
+					<label>Select an Action:</label>
+					<select ng-model="selectValue"
+							ng-options="item.id as item.action group by item.place for item in todos">
+						<option value="">(Pick One)</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="well">
+				<p>Selected: {{selectValue || 'None'}}</p>
+			</div>
+
+		</form>
+
+	</div>
+
+</body>
+</html>
